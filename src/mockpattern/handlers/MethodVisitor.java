@@ -44,16 +44,18 @@ public class MethodVisitor extends ASTVisitor {
 					Pattern PatternWhen = Pattern.compile("when\\(([^}]*)\\)\\.");
 					Matcher matcher = PatternWhen.matcher(s.toString());
 					if(matcher.find()) {
-						if(s.toString().contains("doReturn")) {
-							System.out.println(node.getName().toString());
-							System.out.println(s.toString());
-							MethodInvocationVisitorTypeA visitor = new MethodInvocationVisitorTypeA();
-							s.accept(visitor);
-						}
-//						if(s.toString().contains("thenReturn")) {
-//							MethodInvocationVisitorTypeB visitor = new MethodInvocationVisitorTypeB();
+//						if(s.toString().contains("doReturn")) {
+//							System.out.println(node.getName().toString());
+//							System.out.println(s.toString());
+//							MethodInvocationVisitorTypeA visitor = new MethodInvocationVisitorTypeA();
 //							s.accept(visitor);
 //						}
+						if(s.toString().contains("thenReturn")) {
+							System.out.println(node.getName().toString());
+							System.out.println(s.toString());
+							MethodInvocationVisitorTypeB visitor = new MethodInvocationVisitorTypeB();
+							s.accept(visitor);
+						}
 					}
 				}
 //				else if(s.getNodeType() == Statement.ENHANCED_FOR_STATEMENT) {	
@@ -132,3 +134,4 @@ public class MethodVisitor extends ASTVisitor {
 	}
 
 }
+
