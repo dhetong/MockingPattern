@@ -44,12 +44,12 @@ public class MethodVisitor extends ASTVisitor {
 					Pattern PatternWhen = Pattern.compile("when\\(([^}]*)\\)\\.");
 					Matcher matcher = PatternWhen.matcher(s.toString());
 					if(matcher.find()) {
-//						if(s.toString().contains("doReturn")) {
-//							System.out.println(node.getName().toString());
-//							System.out.println(s.toString());
-//							MethodInvocationVisitorTypeA visitor = new MethodInvocationVisitorTypeA();
-//							s.accept(visitor);
-//						}
+						if(s.toString().contains("doReturn")) {
+							System.out.println(node.getName().toString());
+							System.out.println(s.toString());
+							MethodInvocationVisitorTypeA visitor = new MethodInvocationVisitorTypeA();
+							s.accept(visitor);
+						}
 						if(s.toString().contains("thenReturn")) {
 							System.out.println(node.getName().toString());
 							System.out.println(s.toString());

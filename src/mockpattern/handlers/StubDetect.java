@@ -98,7 +98,7 @@ public class StubDetect extends AbstractHandler {
 			{
 				for (ICompilationUnit unit : mypackage.getCompilationUnits())
 				{
-					CompilationUnit cunit = ASTBuilder(unit);
+					CompilationUnit cunit = ASTBuilder(unit, javaProject);
 				    MethodVisitor visitor = new MethodVisitor(javaProject);
 				    cunit.accept(visitor);
 				}
@@ -106,8 +106,8 @@ public class StubDetect extends AbstractHandler {
 		}
 	}
 	
-	private CompilationUnit ASTBuilder(ICompilationUnit unit) throws CoreException {
-		ASTParser astParser = ASTParser.newParser(AST.JLS3);
+	private CompilationUnit ASTBuilder(ICompilationUnit unit, IJavaProject javaProject) throws CoreException {
+		ASTParser astParser = ASTParser.newParser(AST.JLS8);
 		astParser.setResolveBindings(true);
 		astParser.setKind(ASTParser.K_COMPILATION_UNIT);
 		astParser.setBindingsRecovery(true);
@@ -115,6 +115,12 @@ public class StubDetect extends AbstractHandler {
 		Map options = JavaCore.getOptions();
 		astParser.setCompilerOptions(options);
 		astParser.setSource(unit);
+		astParser.setProject(javaProject);
+		
+		String unitName = "1.java";
+		astParser.setUnitName(unitName);
+
+		astParser.setEnvironment(null, null, null, true);
 		CompilationUnit result = (CompilationUnit) (astParser.createAST(null));
         return result;
 	}
